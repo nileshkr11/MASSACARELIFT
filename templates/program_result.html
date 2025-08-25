@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Your 5-Week Program</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="container py-4">
+
+  <h1 class="mb-3">Your 5-Week Training Program</h1>
+
+  <!-- Download + Nav Buttons -->
+  <div class="mb-3 d-flex gap-2">
+    <a href="{{ url_for('download_program') }}" class="btn btn-info">Download Program (CSV)</a>
+    <a href="{{ url_for('program') }}" class="btn btn-outline-secondary">Back to 1RM Input</a>
+    <a href="{{ url_for('index') }}" class="btn btn-outline-secondary">Home</a>
+  </div>
+
+  <table class="table table-bordered text-center">
+    <thead class="table-dark">
+      <tr>
+        <th>Week</th>
+        <th colspan="2">Squat</th>
+        <th colspan="2">Bench</th>
+        <th colspan="2">Deadlift</th>
+      </tr>
+      <tr>
+        <th></th>
+        <th>Main Set</th>
+        <th>Drop Sets</th>
+        <th>Main Set</th>
+        <th>Drop Sets</th>
+        <th>Main Set</th>
+        <th>Drop Sets</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in program %}
+      <tr>
+        <td>{{ row.week }}</td>
+        <td>{{ row.squat_main }}</td>
+        <td>{{ row.squat_drop }}</td>
+        <td>{{ row.bench_main }}</td>
+        <td>{{ row.bench_drop }}</td>
+        <td>{{ row.dead_main }}</td>
+        <td>{{ row.dead_drop }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+</body>
+</html>

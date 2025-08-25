@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Workout Tracker</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="container py-4">
+
+  <h1 class="mb-4">Workout Tracker</h1>
+
+  <!-- Add Session Form -->
+  <form action="/add" method="post" class="row g-3 mb-4">
+    <div class="col-md-2">
+      <input type="date" name="date" class="form-control" required>
+    </div>
+    <div class="col-md-2">
+      <select name="lift_type" class="form-select" required>
+        <option value="Squat">Squat</option>
+        <option value="Bench">Bench</option>
+        <option value="Deadlift">Deadlift</option>
+      </select>
+    </div>
+    <div class="col-md-2">
+      <input type="number" step="0.1" name="weight" class="form-control" placeholder="Weight (kg)" required>
+    </div>
+    <div class="col-md-2">
+      <input type="number" name="reps" class="form-control" placeholder="Reps" required>
+    </div>
+    <div class="col-md-2">
+      <input type="number" name="sets" class="form-control" placeholder="Sets" required>
+    </div>
+    <div class="col-md-2">
+      <button type="submit" class="btn btn-success w-100">Add Session</button>
+    </div>
+  </form>
+
+  <!-- Squat Table -->
+  <h2>Squat</h2>
+  <table class="table table-bordered">
+    <tr><th>Date</th><th>Weight</th><th>Reps</th><th>Sets</th><th>Action</th></tr>
+    {% for row in squat %}
+    <tr>
+      <td>{{ row[1] }}</td>
+      <td>{{ row[3] }}</td>
+      <td>{{ row[4] }}</td>
+      <td>{{ row[5] }}</td>
+      <td><a href="/delete/{{ row[0] }}" class="btn btn-danger btn-sm">Delete</a></td>
+    </tr>
+    {% endfor %}
+  </table>
+  <a href="{{ url_for('report', lift_type='Squat') }}" class="btn btn-primary mb-5">View Report</a>
+
+  <!-- Bench Table -->
+  <h2>Bench</h2>
+  <table class="table table-bordered">
+    <tr><th>Date</th><th>Weight</th><th>Reps</th><th>Sets</th><th>Action</th></tr>
+    {% for row in bench %}
+    <tr>
+      <td>{{ row[1] }}</td>
+      <td>{{ row[3] }}</td>
+      <td>{{ row[4] }}</td>
+      <td>{{ row[5] }}</td>
+      <td><a href="/delete/{{ row[0] }}" class="btn btn-danger btn-sm">Delete</a></td>
+    </tr>
+    {% endfor %}
+  </table>
+  <a href="{{ url_for('report', lift_type='Bench') }}" class="btn btn-primary mb-5">View Report</a>
+
+  <!-- Deadlift Table -->
+  <h2>Deadlift</h2>
+  <table class="table table-bordered">
+    <tr><th>Date</th><th>Weight</th><th>Reps</th><th>Sets</th><th>Action</th></tr>
+    {% for row in deadlift %}
+    <tr>
+      <td>{{ row[1] }}</td>
+      <td>{{ row[3] }}</td>
+      <td>{{ row[4] }}</td>
+      <td>{{ row[5] }}</td>
+      <td><a href="/delete/{{ row[0] }}" class="btn btn-danger btn-sm">Delete</a></td>
+    </tr>
+    {% endfor %}
+  </table>
+  <a href="{{ url_for('report', lift_type='Deadlift') }}" class="btn btn-primary mb-5">View Report</a>
+
+  <!-- ✅ New Button for Program Page -->
+  <div class="text-center mt-4">
+    <a href="{{ url_for('program') }}" class="btn btn-warning btn-lg">Generate 5-Week Program</a>
+  </div>
+
+</body>
+</html>
